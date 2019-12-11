@@ -86,7 +86,8 @@ const initialState = {
 //     }
 // };
 
-const todos = handleActions({
+const todos = handleActions(
+    {
         [CHANGE_INPUT]: (state, { payload: input }) => ({ ...state, input: input }),
         [INSERT]: (state, { payload: todo }) => ({
             ...state,
