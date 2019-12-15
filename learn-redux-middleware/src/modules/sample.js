@@ -16,6 +16,7 @@ const GET_USERS_SUCCESS = 'sample/GET_USERS_SUCCESS';
 // saga
 const GET_USERS_FAILURE = 'sample/GET_USERS_FAILURE';
 
+// optimizing
 // creating thunk
 // different action will be dispatch when start, success or failure
 // export const getPost = createRequestThunk(GET_POST, api.getPost);
