@@ -35,7 +35,7 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 counter: state.counter + action.difference
-            }
+            };
         case DECREASE:
             return {
                 ...state,
