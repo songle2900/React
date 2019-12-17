@@ -83,6 +83,8 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  srrIndexJs: resolveApp('src/index.server.js'), // Server side rendering entry
+  ssrBuild: resolveApp('dist') // Save path after Webpack
 };
 
 
