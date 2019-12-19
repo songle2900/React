@@ -8,7 +8,8 @@ import fs from 'fs';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import rootReducer from './modules';
+import createSagaMiddleware, { END } from 'redux-saga';
+import rootReducer, { rootSaga } from './modules';
 import PreloadContext from './lib/PreloadContext';
 
 // look up file path in asset-manifest.json
@@ -53,7 +54,16 @@ const app = express();
 const serverRender = async (req, res, next) => {
     // this function will server-side rendering instead of displaying 404
     const context = {};
-    const store = createStore(rootReducer, applyMiddleware(thunk));
+    const sagaMiddleware = createSagaMiddleware();
+
+    const store = createStore(
+        rootReducer, 
+        applyMiddleware(thunk, sagaMiddleware)
+    );
+
+    // toPromise: convert task from sagaMiddleware.run to Promise
+    const sagaPromise = sagaMiddleware.run(rootSaga).toPromise();
+
     const preloadContext = {
         done: false,
         promises: []
@@ -68,8 +78,11 @@ const serverRender = async (req, res, next) => {
             </Provider>
         </PreloadContext.Provider>
     );
+
     ReactDOMServer.renderToStaticMarkup(jsx); // Rendering
+    store.dispatch(END); // redux-saga END: all sagas will be end
     try {
+        await sagaPromise; // wait for on-going saga till finish
         await Promise.all(preloadContext.promises); // wait for all promises
     } catch (e) {
         return res.status(500);
