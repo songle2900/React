@@ -49,7 +49,7 @@ function users(state = initialState, action) {
             return {
                 ...state,
                 loading: { ...state.loading, users: false },
-                error: { ...state.error, users: action.payload }
+                users:action.payload.data
             };
         case GET_USERS_FAILURE:
             return {
