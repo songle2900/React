@@ -11,10 +11,8 @@ const manifest = JSON.parse(
     fs.readFileSync(path.resolve('./build/asset-manifest.json'), 'utf8')
 );
 
-const chunks = Object.keys(manifest.files)
-    .filter(key => /chunk\.js$/.exec(key)) // Find key that ends with chunk.js,
-    .map(key => `<script src="${manifest[key]}"></script>`) // change to script tag
-    . join(''); // and join
+// Find key that ends with chunk.js, change to script tag and join
+const chunks = Object.keys(manifest.files).filter(key => /chunk\.js$/.exec(key)).map(key => `<script src="${manifest.files[key]}"></script>`).join(''); 
 
 function createPage(root) {
     return `<!DOCTYPE html>
@@ -28,16 +26,16 @@ function createPage(root) {
         />
         <meta name="theme-color" content="#000000" />
         <title>React App</title>
-        <link href="${manifest['main.css']}" rel="stylesheet" />
+        <link href="${manifest.files['main.css']}" rel="stylesheet" />
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root">
             ${root}
         </div>
-        <script src="${manifest['runtime-main.js']}"></script>
+        <script src="${manifest.files['runtime-main.js']}"></script>
         ${chunks}
-        <script src="${manifest['main.js']}"></script>
+        <script src="${manifest.files['main.js']}"></script>
     </body>
     </html>
     `;
