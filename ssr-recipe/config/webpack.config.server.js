@@ -66,7 +66,8 @@ module.exports = {
                         exclude: cssModuleRegex,
                         loader: require.resolve('css-loader'),
                         options: {
-                            exportsOnlyLocals: true
+                            // exportOnlyLocals does not work anymore
+                            onlyLocals: true
                         }
                     },
                     // For CSS Module
@@ -75,7 +76,7 @@ module.exports = {
                         loader: require.resolve('css-loader'),
                         options: {
                             modules: true,
-                            exportsOnlyLocals: true,
+                            onlyLocals: true,
                             getLocalIdent: getCSSModuleLocalIdent
                         }
                     },
@@ -87,7 +88,7 @@ module.exports = {
                             {
                                 loader: require.resolve('css-loader'),
                                 options: {
-                                    exportsOnlyLocals: true
+                                    onlyLocals: true
                                 }
                             },
                             require.resolve('sass-loader')
@@ -102,7 +103,7 @@ module.exports = {
                                 loader: require.resolve('css-loader'),
                                 options: {
                                     modules: true,
-                                    exportsOnlyLocals: true,
+                                    onlyLocals: true,
                                     getLocalIdent: getCSSModuleLocalIdent
                                 }
                             },
