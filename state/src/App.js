@@ -74,7 +74,6 @@ import Person from "./Person/Person";
           <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>
             My hobby is loving Eric.
           </Person>
-          <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
           
         </div>
       );
