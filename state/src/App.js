@@ -64,6 +64,16 @@ import Person from "./Person/Person";
       });
     };
 
+    nameChangeHandler = (event) => {
+      this.setState({
+        persons: [
+          { name: event.target.value, age: 2 },
+          { name: 'Carol', age: 3 },
+          { name: 'Danny', age: 4 }
+        ],
+      });
+    }
+
     render() {
       return (
         <div className="App">
@@ -72,7 +82,8 @@ import Person from "./Person/Person";
           <button onClick={() => this.switchNameHandler('Song!!!')}>Switch Name</button>
           <Person 
             name={this.state.persons[0].name} 
-            age={this.state.persons[0].age} 
+            age={this.state.persons[0].age}
+            changed={this.nameChangeHandler}
           />
           <Person 
             name={this.state.persons[1].name} 
