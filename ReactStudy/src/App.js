@@ -53,7 +53,7 @@ class App extends Component {
     showPersons: false
   };
 
-  nameChangeHandler = ( event, id ) => {
+  nameChangeHandler = ( e, id ) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
@@ -63,7 +63,7 @@ class App extends Component {
     };
     // const person = Object.assign({}, this.state.person[personIndex]);
 
-    person.name = event.target.value;
+    person.name = e.target.value;
 
     const persons = [...this.state.persons];
     persons[personIndex] = person;
