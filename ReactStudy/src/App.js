@@ -94,7 +94,7 @@ class App extends Component {
 
     let persons = null;
 
-    if (this.state.showPersons) {
+    if ( this.state.showPersons ) {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
