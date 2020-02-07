@@ -17,13 +17,6 @@ const StyledDiv = styled.div `
 `;
 
 const Person = ( props ) => {
-    // Using Raduim for Media Queries
-    const style = {
-        '@media (min-width: 500px)': {
-            width: '450px'
-        }
-    };
-
     return (
         // <div className="Person" style={style}>
         <StyledDiv>

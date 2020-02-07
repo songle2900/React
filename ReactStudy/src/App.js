@@ -1,49 +1,24 @@
 import React, { Component } from "react";
+import styled from 'styled-components';
 import "./App.css";
 // // StyleRoot
 // import Radium, { StyleRoot } from "radium";
 import Person from "./Person/Person";
 
-// Functional Component
-// const App = () => {
-//   const [personsState, setPersonsState] = useState({
-//     persons: [
-//       { name: 'Eric', age: 1 },
-//       { name: 'Carol', age: 2 },
-//       { name: 'Danny', age: 3 }
-//     ]
-//   });
+const StyledButton = styled.button`
+  background-color: ${props => props.alt ? 'red' : 'green'};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+    color: black;
+  }
+`;
 
-//   const [otherState, setOtherState] = useState('some other value');
-
-//   console.log(personsState, otherState);
-
-//   const switchNameHandler = () => {
-//     setPersonsState({
-//       persons: [
-//         { name: 'Eric Song', age: 2 },
-//         { name: 'Carol', age: 3 },
-//         { name: 'Danny', age: 4 }
-//       ],
-//       otherState: personsState.otherState
-//     });
-//   }
-
-//   return (
-//     <div className="App">
-//       <h1>Hi, I'm a React App</h1>
-//       <p>This is really working!</p>
-//       <button onClick={switchNameHandler}>Switch Name</button>
-//       <Person name={personsState.persons[0].name} age={personsState.persons[0].age}>
-//       <Person name={personsState.persons[1].name} age={personsState.persons[1].age} />
-//         My Hobbies: Loving Eric
-//       </Person>
-//       <Person name={personsState.persons[2].name} age={personsState.persons[2].age} />
-//     </div>
-//   );
-// };
-
-// Class Component
 class App extends Component {
   state = {
     persons: [
@@ -86,20 +61,6 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "green",
-      color: "white",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-      // Using Radium
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black"
-      }
-    };
-
     let persons = null;
 
     if (this.state.showPersons) {
@@ -118,13 +79,6 @@ class App extends Component {
           })}
         </div>
       );
-
-      style.backgroundColor = "red";
-      // Using Radium
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black"
-      };
     }
 
     // Setting className dynamically
@@ -143,9 +97,9 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p className={classes.join(" ")}>This is really working!</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
+        <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
           Toggle Persons
-        </button>
+        </StyledButton>
         {persons}
       </div>
     );
